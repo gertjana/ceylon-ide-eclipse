@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin>com.redhat.ceylon.eclipse.ui
-
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            name="%View.label"
+            icon="$nl$/icons/full/eview16/junit.gif"
+            category="org.eclipse.jdt.ui.java"
+            fastViewWidthRatio="0.40"
+            class="org.eclipse.jdt.internal.junit.ui.TestRunnerViewPart"
+            id="org.eclipse.jdt.junit.ResultView">
+      </view>
+   </extension>
    <extension
          point="org.eclipse.core.contenttype.contentTypes">
        <content-type
@@ -907,6 +917,42 @@
          </description>
          <description
                description="Debugs a local Ceylon application"
+               mode="debug">
+         </description>
+         <contextualLaunch>
+            <enablement>
+               <with variable="selection">
+                  <count value="1"/>
+                  <iterate>
+                     <or>
+<!--                        <test property="org.eclipse.jdt.launching.hasMain"/>
+                        <and>
+                           <test property="org.eclipse.jdt.launching.isContainer"/>
+                           <test property="org.eclipse.jdt.launching.hasProjectNature" args="org.eclipse.jdt.core.javanature"/>
+                        </and>
+                        -->
+                     </or>
+                  </iterate>
+               </with>
+            </enablement>
+         </contextualLaunch>
+         <configurationType
+            id="com.redhat.ceylon.eclipse.ui.launching.localCeylonApplication">
+         </configurationType>
+      </shortcut>
+      <shortcut
+            label="Test Ceylon Application"
+            icon="icons/ceylon_app.gif"
+            modes="run, debug"
+            class="com.redhat.ceylon.eclipse.core.test.CeylonApplicationTestLaunchShortcut"
+            description="Test a local Ceylon application"
+            id="com.redhat.ceylon.eclipse.ui.launcher.localJavaShortcut">
+         <description 
+               description="Test (Run) a local Ceylon application"
+               mode="run">
+         </description>
+         <description
+               description="Test (Debug) a local Ceylon application"
                mode="debug">
          </description>
          <contextualLaunch>
